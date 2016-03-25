@@ -2,7 +2,7 @@
 
 use App\Models\Book;
 
-class BookRepository extends Repository {
+class BookRepository{
     
     protected $sortColumn = "id";
     
@@ -11,7 +11,7 @@ class BookRepository extends Repository {
      */
     public function __construct(Book $book)
     {
-        parent::__construct($book);
+        return $book;
     }
 
     /**
@@ -39,7 +39,7 @@ class BookRepository extends Repository {
         /**
          * Find the book or fail. The exception is handled by the controller.
          */
-        $book = $this->findOrFail($id);
+        $book = Book::findOrFail($id);
 
         $book->update($data);
     }

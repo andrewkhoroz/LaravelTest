@@ -26,7 +26,12 @@ class BooksController extends Controller{
     public function index(Request $request)
     {
         $per_page = 3;
-        $books = $this->books->allPaginated($per_page);
+        $books = Book::join('authors as au', 'au.id', '=', 'books.author_id');
+        if ($orderBy = $request->get('orderBy')) {
+            $books = $books->orderBy($orderBy, $request->get('order'));
+        }
+        $books = $books->select('books.*')
+                       ->paginate(3);
         $lastPage = $books->toArray()["last_page"];
         $page = $request->get('page');
         if (is_null($page)) {

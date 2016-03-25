@@ -97,6 +97,13 @@
 		  	success: function(response) {
 		  		if (response == 'ok') {
 		  			$('#myModal').modal('hide');
+		  			var _url = $('.pagination .active a').prop('href');
+				    if ($('.table thead th').hasClass('order')) {
+					    var _orderBy = $('.table thead th.order').data('orderby');
+					    var _order = $('.table thead th.order').data('order');
+					    _url = _url + '&orderBy=' + _orderBy + '&order=' +_order;
+				    };
+	    			list(_url);
 		  		};
 		  	},
 			error: function(data){

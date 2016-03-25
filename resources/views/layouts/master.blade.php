@@ -20,8 +20,10 @@
 
     <!-- Custom styles for this template -->
     <link href="http://getbootstrap.com/examples/jumbotron/jumbotron.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/public/asset/custom.css">
+    <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
+    
     <script type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="http://getbootstrap.com/assets/js/ie-emulation-modes-warning.js">
     <link rel="stylesheet" type="text/css" href="http://getbootstrap.com/assets/js/ie-emulation-modes-warning.js">
     <script src="http://getbootstrap.com/assets/js/ie-emulation-modes-warning.js"></script>
   </head>

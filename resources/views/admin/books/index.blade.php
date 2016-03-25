@@ -8,12 +8,24 @@
 
 <a href="{{ route('admin.books.create') }}" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Create</a>
 <table class="table table-bordered">
-	<thead>
+	<thead data-url="http://booklibrary.local/admin/books?page=1">
 		<th>#</th>
-		<th>Title</th>
-		<th>Author</th>
-		<th>Year</th>
-		<th>ISBN</th>
+		<th data-orderby='title' data-order='asc'>Title
+			<span class='desc'>&darr;</span>
+			<span class='asc'>&uarr;</span>
+		</th>
+		<th data-orderby='au.name' data-order='asc'>Author
+			<span class='desc'>&darr;</span>
+			<span class='asc'>&uarr;</span>
+		</th>
+		<th data-orderby='year' data-order='asc'>Year
+			<span class='desc'>&darr;</span>
+			<span class='asc'>&uarr;</span>
+		</th>
+		<th data-orderby='isbn' data-order='asc'>ISBN
+			<span class='desc'>&darr;</span>
+			<span class='asc'>&uarr;</span>
+		</th>
 		<th>Action</th>
 	</thead>
 	<tbody>
@@ -96,6 +108,21 @@
 
 	deleteMethod();
 
+	$('.table thead th').on('click', function (e) {
+		if ($(this).hasClass('desc')) {
+			$('.table thead th').removeClass();
+			$(this).attr('data-order', 'asc');
+			$(this).addClass('asc order');
+			var _url = $('.table thead').data('url') + '&orderBy=' + $(this).data('orderby') + '&order=asc'; 
+		} else{
+			$('.table thead th').removeClass();
+			$(this).attr('data-order', 'desc');
+			$(this).addClass('desc order');
+			var _url = $('.table thead').data('url') + '&orderBy=' + $(this).data('orderby') + '&order=desc'; 
+		};
+	    list(_url);
+	})
+
 	function deleteMethod() {
 		$('.btn-danger').on('click', function(e){
 			var _this = $(this);
@@ -132,66 +159,73 @@
          		return;
 		    }
 		    var _url = _this.prop('href');
-		    var _text = _this.text();
-			$.ajax({
-		    	method: 'GET',
-		    	url: _url,
-		  		data: {
-		  			_token: '{{ csrf_token() }}'
-		  		},
-			  	success: function(response) {
-			  		console.log(response);
-			  		// remove old records
-			  		$('.table tbody').empty();
-
-			  		// set variables
-			  		var obj = jQuery.parseJSON(response);
-			  		var current_page = obj.current_page;
-			  		var last_page = obj.last_page;
-			  		var per_page = obj.per_page;
-			  		var prev_page_url = obj.prev_page_url;
-			  		var next_page_url = obj.next_page_url;
-			  		var data = obj.data;
-
-			  		// handle pagination link
-			  		$(".pagination li").removeClass('disabled active');
-			  		$(".pagination li.prev a").attr('href',prev_page_url);
-			  		$(".pagination li.next a").attr('href',next_page_url);
-			  		if (current_page == last_page) {
-			  			$(".pagination li.next").addClass('disabled');
-			  		};
-			  		if (current_page == 1) {
-			  			$(".pagination li.prev").addClass('disabled');
-			  		};
-			  		var _eq = '.pagination li:eq(' + current_page + ')';
-		    		$(_eq).addClass('active');
-
-			  		// replace new records
-			  		$.each(data, function( index, value ) {
-			  			var index = (index+1)+per_page*(current_page-1);
-			  			var hrefEdit = '/admin/books/' + value.id + '/edit';
-			  			var hrefDelete = '/admin/books/' + value.id;
-			  			var html = '<tr>' + 
-										'<td>' + index + '</td>' + 
-										'<td>' + value.title + '</td>' + 
-										'<td>' + value.author + '</td>' + 
-										'<td>' + value.year + '</td>' + 
-										'<td>' + value.isbn + '</td>' + 
-										'<td>' + 
-											'<a href="' + hrefEdit + '" class="btn btn-warning" data-toggle="modal" data-target="#myModal" style="margin-right: 5px;">Edit</a>' + 
-											'<a href="' + hrefDelete + '" class="btn btn-danger">Delete</a>' + 
-										'</td>' + 
-									'</tr>'
-			  			$('.table tbody').append(html);
-					});
-					deleteMethod();
-			  	},
-				error: function(data){
-					var errors = data.responseJSON;
-	        		console.log(errors);
-				}
-			});
+		    if ($('.table thead th').hasClass('order')) {
+			    var _orderBy = $('.table thead th.order').data('orderby');
+			    var _order = $('.table thead th.order').data('order');
+			    _url = _url + '&orderBy=' + _orderBy + '&order=' +_order;
+		    };
+		    list(_url);
 		})
+	}
+
+	function list(_url) {
+		$.ajax({
+	    	method: 'GET',
+	    	url: _url,
+	  		data: {
+	  			_token: '{{ csrf_token() }}'
+	  		},
+		  	success: function(response) {
+		  		// remove old records
+		  		$('.table tbody').empty();
+
+		  		// set variables
+		  		var obj = jQuery.parseJSON(response);
+		  		var current_page = obj.current_page;
+		  		var last_page = obj.last_page;
+		  		var per_page = obj.per_page;
+		  		var prev_page_url = obj.prev_page_url;
+		  		var next_page_url = obj.next_page_url;
+		  		var data = obj.data;
+
+		  		// handle pagination link
+		  		$(".pagination li").removeClass('disabled active');
+		  		$(".pagination li.prev a").attr('href',prev_page_url);
+		  		$(".pagination li.next a").attr('href',next_page_url);
+		  		if (current_page == last_page) {
+		  			$(".pagination li.next").addClass('disabled');
+		  		};
+		  		if (current_page == 1) {
+		  			$(".pagination li.prev").addClass('disabled');
+		  		};
+		  		var _eq = '.pagination li:eq(' + current_page + ')';
+	    		$(_eq).addClass('active');
+
+		  		// replace new records
+		  		$.each(data, function( index, value ) {
+		  			var index = (index+1)+per_page*(current_page-1);
+		  			var hrefEdit = '/admin/books/' + value.id + '/edit';
+		  			var hrefDelete = '/admin/books/' + value.id;
+		  			var html = '<tr>' + 
+									'<td>' + index + '</td>' + 
+									'<td>' + value.title + '</td>' + 
+									'<td>' + value.author + '</td>' + 
+									'<td>' + value.year + '</td>' + 
+									'<td>' + value.isbn + '</td>' + 
+									'<td>' + 
+										'<a href="' + hrefEdit + '" class="btn btn-warning" data-toggle="modal" data-target="#myModal" style="margin-right: 5px;">Edit</a>' + 
+										'<a href="' + hrefDelete + '" class="btn btn-danger">Delete</a>' + 
+									'</td>' + 
+								'</tr>'
+		  			$('.table tbody').append(html);
+				});
+				deleteMethod();
+		  	},
+			error: function(data){
+				var errors = data.responseJSON;
+        		console.log(errors);
+			}
+		});
 	}
 </script>
 @endsection

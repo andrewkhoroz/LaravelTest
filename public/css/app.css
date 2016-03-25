@@ -1,0 +1,17 @@
+.table{
+	margin-top: 20px;
+}
+.table thead th{
+	cursor: pointer;
+	color: #DC9713;
+}
+.table thead th span{
+	color: #000;
+	display: none;
+}
+.table thead th.desc span.desc{
+	display: inline-block;
+}
+.table thead th.asc span.asc{
+	display: inline-block;
+}
