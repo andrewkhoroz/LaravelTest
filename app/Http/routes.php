@@ -10,11 +10,25 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+use App\Books;
+use Illuminate\Support\Facades\DB;
 
 Route::group(['middleware' => ['web']], function () {
 
     Route::get('/', function () {
-        return view('welcome');
+        return view('home');
     });
+
+    Route::post('books/getlist', function() {
+        $books = DB::table('books')
+            ->join('authors', 'books.author', '=', 'authors.id')
+            ->select('books.*', 'authors.name as author_name')
+            ->whereNull('books.deleted_at')
+            ->get();
+        return $books;
+    });
+
+    Route::resource('/authors', 'AuthorController');
+    Route::resource('/books', 'BookController');
 
 });
