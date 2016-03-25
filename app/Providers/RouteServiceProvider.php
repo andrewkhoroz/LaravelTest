@@ -25,6 +25,10 @@ class RouteServiceProvider extends ServiceProvider
     public function boot(Router $router)
     {
         //
+        $router->model('books', 'App\Models\Book', function()
+        {
+            exit('not found model');
+        });
 
         parent::boot($router);
     }

@@ -1,0 +1,17 @@
+.authenticate{
+	float: right;
+	margin: 0;
+	padding: 0;
+}
+.authenticate li{
+	display: inline-block;
+}
+footer{
+	background: #222;
+	padding: 20px 0;
+	color: #fff;
+}
+
+footer p{
+	margin-bottom: 0;
+}
