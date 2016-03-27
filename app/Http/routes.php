@@ -11,10 +11,12 @@
 |
 */
 
-Route::group(['middleware' => ['web']], function () {
+Route::get( '/', 'BookController@showBooks' );
 
-    Route::get('/', function () {
-        return view('welcome');
-    });
+Route::post( '/delete-book', 'BookController@deleteBook' );
 
-});
+Route::get( '/edit-book/{id}', 'BookController@editBook' );
+Route::post( '/edit-book/{id}', 'BookController@updateBook' );
+
+Route::get( '/add-book', 'BookController@addBook' );
+Route::post( '/add-book', 'BookController@saveBook' );

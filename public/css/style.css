@@ -1,0 +1,433 @@
+#content {
+    margin: 120px 0;
+}
+
+
+/* Bootstrap modification */
+
+.navbar {
+    margin-bottom: 0;
+}
+
+.jumbotron p {
+    font-size: 16px;
+}
+
+.navbar-brand img {
+    max-width: 130px;
+}
+
+.nav.navbar-nav.staff,
+.nav.navbar-nav.patient {
+    background-color: #000;
+}
+
+.staff > li > a,
+.patient > li > a {
+    color: red!important;
+}
+
+.nav.navbar-nav.patient .navbar-default .navbar-nav > li > a:hover {
+    color: white;
+}
+
+.nav.navbar-nav.patient .navbar-default .navbar-nav > .active > a {
+    color: white;
+    background: indianred;
+}
+
+
+/* Sidebar navmenu */
+
+#sidebar {
+    height: 100%;
+    border-color: #e7e7e7;
+    border-right: 1px solid;
+    background-color: #f8f8f8;
+}
+
+#sidebar li.active {
+    color: #555;
+    background-color: #e7e7e7;
+}
+
+
+/* Custom elements */
+
+#status {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+#ongoing {
+    cursor: pointer;
+    background-color: #a3d2e0;
+}
+
+.template {
+    border-bottom: 1px solid #e3e3e3;
+}
+
+#recall-type label,
+#recall-sub-type label {
+    cursor: default!important;
+}
+
+@media screen and (min-width: 979px) {
+    #midCol.affix-top {
+        position: fixed;
+        width: 265px;
+        margin-right: 10px;
+    }
+    #midCol.affix {
+        position: static;
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 767px) {
+    .affix,
+    .affix-top {
+        position: fixed;
+        top: 100px;
+        left: 0;
+        width: 160px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .jumbotron {
+        margin-top: -30px;
+    }
+    .navbar-right {
+    margin-right: 0px;
+}
+
+
+}
+
+.closed {
+    padding: 5px 0;
+    text-align: center;
+    border: 1px solid #ddd;
+    background-color: #f5f5f5;
+}
+
+
+/* Helper classes */
+
+.width100 {
+    width: 100%!important;
+}
+
+.font-bold {
+    font-weight: bold;
+}
+
+.arrived {
+    background-color: rgba(255, 0, 0, .57);
+}
+
+.patient-time {
+    background-color: rgba(255, 0, 0, .57);
+}
+
+.seen {
+    background-color: #6B8E23;
+}
+
+.m0 {
+    margin: 0;
+}
+
+.mt10 {
+    margin-top: 10px;
+}
+
+.mt20 {
+    margin-top: 20px;
+}
+
+.mt30 {
+    margin-top: 30px;
+}
+
+.mt50 {
+    margin-top: 50px;
+}
+
+.mt100 {
+    margin-top: 100px;
+}
+
+.mb10 {
+    margin-bottom: 10px;
+}
+
+.mb20 {
+    margin-bottom: 20px;
+}
+
+.mlr10 {
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.ml20 {
+    margin-right: 20px;
+}
+
+.mr10 {
+    margin-right: 10px;
+}
+
+.mr20 {
+    margin-right: 20px;
+}
+
+.mradio {
+    margin-top: 5px!important;
+    margin-right: 0!important;
+    margin-left: 0!important;
+}
+
+.p0 {
+    padding: 0;
+}
+
+.pt5 {
+    padding-top: 5px;
+}
+
+.pt7 {
+    padding-top: 7px;
+}
+
+.pt10 {
+    padding-top: 10px;
+}
+
+.plr7 {
+    padding: 0 7px!important;
+}
+
+.plr10 {
+    padding: 0 10px;
+}
+
+.pb30 {
+    padding-bottom: 30px;
+}
+
+.ptb10 {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.ptb20 {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.ml15 {
+    margin-left: 15px;
+}
+
+.h140 {
+    overflow: scroll;
+    height: 140px;
+}
+
+.h180 {
+    overflow: scroll;
+    height: 180px;
+}
+
+.h280 {
+    overflow: scroll;
+    height: 280px;
+}
+
+.h480 {
+    overflow: auto;
+    height: 480px;
+}
+
+.min350 {
+    min-height: 500px;
+}
+
+.table-scrollable {
+    overflow: scroll;
+    height: 158px;
+}
+
+.table-scrollable-equery {
+    overflow: scroll;
+    height: 351px;
+}
+
+.table-scrollable-226 {
+    overflow: scroll;
+    height: 226px;
+}
+
+.table-scrollable-240 {
+    overflow: scroll;
+    height: 240px;
+}
+
+.table-scrolable-277 {
+    overflow: scroll;
+    height: 277px;
+}
+
+.table-scrolable-280 {
+    overflow: scroll;
+    height: 280px;
+}
+
+.table-scrolable-470 {
+    overflow: scroll;
+    height: 470px;
+}
+
+.table-hidden-content,
+.hidden-content {
+    display: none;
+}
+
+.pointer,
+.pointer tbody tr {
+    cursor: pointer;
+}
+
+.table-cell-input {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+::-webkit-scrollbar {
+    width: 7px;
+    -webkit-appearance: none;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, .5);
+    --webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+}
+
+.navbar.navbar-default .container-fluid {
+    width: 80%;
+}
+ul.nav.navbar-nav.patient {
+    width:62%;
+}
+
+#navbar ul.nav.navbar-nav.patient li {
+    width: calc(100% / 4);
+    text-align: center;
+}
+
+ul.nav.navbar-nav.staff {
+    width:62%;
+}
+
+#navbar ul.nav.navbar-nav.staff li {
+    width: calc(100% / 3);
+    text-align: center;
+}
+
+.hh-secd-bar > ul.nav.navbar-nav {
+    float: right;
+    width: 71%;
+    background: #cccccc;
+    border: 1px solid #888888;
+}
+
+
+#navbar .nav:not(.navbar-right) > li > a {
+    padding: 15px 0px;
+    text-transform: uppercase;
+    font-size: .9em;
+}
+
+#navbar.hhadmin .nav:not(.navbar-right) > li > a {
+    padding: 15px 15px;
+    text-transform: uppercase;
+    font-size: .9em;
+}
+
+#navbar .staff.nav:not(.navbar-right) > li > a {
+    padding: 18px 0px;
+    text-transform: uppercase;
+    font-size: 1.1em;
+}
+
+.hh-secd-bar > ul.nav.navbar-nav li {
+    width: calc(100% / 4);
+    text-align: center;
+    border-right: 1px solid #888888;
+}
+.hh-secd-bar.adminsecnd > ul.nav.navbar-nav li {
+    width: calc(100% / 3);
+    text-align: center;
+    border-right: 1px solid #888888;
+}
+
+.hh-secd-bar.staffsecnd > ul.nav.navbar-nav li {
+    width: calc(100% / 3);
+    text-align: center;
+    border-right: 1px solid #888888;
+}
+
+.hh-secd-bar .nav:not(.navbar-right) > li > a {
+    padding: 15px 0px;
+    text-transform: uppercase;
+    font-size: .9em;
+    color: #000;
+    font-weight: 700;
+}
+.hh-secd-bar.staffsecnd .nav:not(.navbar-right) > li > a {
+    padding: 15px 0px;
+    text-transform: uppercase;
+    font-size: 1.1em;
+    color: #000;
+    font-weight: 700;
+}
+
+.mobile-nav {
+    display: none;
+}
+
+.hhadmin > ul.nav.navbar-nav:not(.navbar-right) {
+    background: #ccc;
+    border: 1px solid #888;
+}
+.hh-secd-bar.adminsecnd > ul.nav.navbar-nav li a {
+    color: #fff;
+    font-size: 1.2em;
+    text-transform: uppercase;
+}
+.adminsecnd > ul.nav.navbar-nav {
+    background: #000;
+}
+#navbar.hhadmin .nav:not(.navbar-right) > li > a {
+    padding: 15px 15px;
+    text-transform: uppercase;
+    font-size: 1.1em;
+    color: #337AEE;
+    font-weight: bold;
+}
+.hhadmin ul.nav.navbar-nav:not(.navbar-right) li {
+    border-right: 1px solid #888;
+}
+
+@media screen and (max-width: 767px) {
+.mobile-nav {
+    display: block;
+}
+    }
