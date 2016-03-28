@@ -57,7 +57,7 @@
                                 <div class="row">
                                     <div class="col-lg-4 col-sm-4">
                                         <div class="input-group">
-                                            <input type="text" name="year" id="year" class="form-control" placeholder="Year" required value="{{ $book->year }}">
+                                            <input type="number" name="year" id="year" class="form-control" placeholder="Year" required value="{{ $book->year }}">
                                         </div>
                                     </div>
                                 </div>

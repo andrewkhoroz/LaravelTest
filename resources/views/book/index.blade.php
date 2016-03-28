@@ -2,6 +2,12 @@
 <div class="container">
            
             <div class="col-sm-10">
+                @if (Session::has('message'))
+                    <div class="alert alert-success">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <strong>Success!</strong> {{ Session::get('message') }}
+                    </div>
+                @endif
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         Book List
@@ -50,9 +56,9 @@
             event.preventDefault();
             var bookId = $(this).data('book-id');
             var $this = $(this);
-            confirm('Are you sure you want to delete this book?');
+            var confirm1 = confirm('Are you sure you want to delete this book?');
 
-            if (confirm) {  
+            if (confirm1) {  
      
                 $.ajax({
                     

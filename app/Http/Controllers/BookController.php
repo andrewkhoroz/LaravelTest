@@ -24,7 +24,7 @@ class BookController extends Controller
         $this->validate( $request, [
             'title'  => 'required',
             'author_id'   => 'required',
-            'year'       => 'required',
+            'year'       => 'required|numeric',
             'isbn'    => 'required',
             ] );
 
@@ -37,12 +37,10 @@ class BookController extends Controller
 
             ] );
 
-        $book = new Book;
-        $authors = Author::lists('name', 'id');
 
         Session::flash('message', 'Book succesfully added.'); 
-        return view( 'book.edit', ['book' => $book, 'authors' => $authors] );
-
+        $books = Book::with('author')->get();
+        return view( 'book.index', ['books' => $books] );
 
     }
 
@@ -83,7 +81,7 @@ class BookController extends Controller
         $this->validate( $request, [
             'title'  => 'required',
             'author_id'   => 'required',
-            'year'       => 'required',
+            'year'       => 'required|numeric',
             'isbn'    => 'required',
             ] );
 
@@ -97,10 +95,9 @@ class BookController extends Controller
 
         $book->push();
 
-        $authors = Author::lists('name', 'id');
-
         Session::flash('message', 'Book succesfully updated.'); 
-        return view( 'book.edit', ['book' => $book, 'authors' => $authors] );
+        $books = Book::with('author')->get();
+        return view( 'book.index', ['books' => $books] );
 
     }
 }
