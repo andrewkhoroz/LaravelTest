@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/xampp/htdocs/book_shelf/config/database.php</file>
+            <file>file:/C:/xampp/htdocs/book_shelf/artisan</file>
+            <file>file:/C:/xampp/htdocs/book_shelf/app/Book.php</file>
+            <file>file:/C:/xampp/htdocs/book_shelf/package.json</file>
+            <file>file:/C:/xampp/htdocs/book_shelf/app/Author.php</file>
+            <file>file:/C:/xampp/htdocs/book_shelf/storage/logs/laravel.log</file>
+            <file>file:/C:/xampp/htdocs/book_shelf/resources/views/welcome.blade.php</file>
+            <file>file:/C:/xampp/htdocs/book_shelf/.env</file>
+            <file>file:/C:/xampp/htdocs/book_shelf/app/User.php</file>
+            <file>file:/C:/xampp/htdocs/book_shelf/resources/views/book_shelf/edit.blade.php</file>
+            <file>file:/C:/xampp/htdocs/book_shelf/database/migrations/2014_10_12_000000_create_users_table.php</file>
+            <file>file:/C:/xampp/htdocs/book_shelf/resources/views/book_shelf/add.blade.php</file>
+            <file>file:/C:/xampp/htdocs/book_shelf/database/migrations/2016_03_27_185508_create_author_table.php</file>
+            <file>file:/C:/xampp/htdocs/book_shelf/database/migrations/2014_10_12_100000_create_password_resets_table.php</file>
+            <file>file:/C:/xampp/htdocs/book_shelf/database/seeds/DatabaseSeeder.php</file>
+            <file>file:/C:/xampp/htdocs/book_shelf/app/Http/Controllers/Controller.php</file>
+            <file>file:/C:/xampp/htdocs/book_shelf/resources/views/book_shelf/index.blade.php</file>
+            <file>file:/C:/xampp/htdocs/book_shelf/config/app.php</file>
+            <file>file:/C:/xampp/htdocs/book_shelf/app/Http/Controllers/BookShelfController.php</file>
+            <file>file:/C:/xampp/htdocs/book_shelf/app/Http/routes.php</file>
+            <file>file:/C:/xampp/htdocs/book_shelf/composer.json</file>
+            <file>file:/C:/xampp/htdocs/book_shelf/database/migrations/2016_03_27_185520_create_book_table.php</file>
+        </group>
+    </open-files>
+</project-private>

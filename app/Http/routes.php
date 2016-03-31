@@ -11,10 +11,23 @@
 |
 */
 
-Route::group(['middleware' => ['web']], function () {
+
+Route::get('/','BookShelfController@index');
+Route::get('add','BookShelfController@add');
+Route::get('index','BookShelfController@index');
+Route::post('/index/remove','BookShelfController@remove');
+Route::get('edit','BookShelfController@edit');
+Route::post('store','BookShelfController@store');
+Route::post('update','BookShelfController@update');
+
+
+
+
+/*Route::group(['middleware' => ['web']], function () {
 
     Route::get('/', function () {
         return view('welcome');
     });
 
 });
+*/
