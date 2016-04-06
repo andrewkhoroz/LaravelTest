@@ -14,8 +14,9 @@ class Author extends Model
     
 //------------------------------------------------------------------------------
     
-    protected $table = 'author';
-    public $timestamps = false;
+    protected $table = 'authors';
+    protected $fillable = ['name', 'email', 'phone'];
+    //public $timestamps = false;
 
 //------------------------------------------------------------------------------
     
@@ -60,6 +61,11 @@ class Author extends Model
     } 
     
 //------------------------------------------------------------------------------
+    
+     public function books()
+    {
+        return $this->hasMany('App\Book', 'author_id');
+    }
     
 }
 

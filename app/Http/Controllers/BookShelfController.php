@@ -24,44 +24,28 @@ class BookShelfController extends Controller
     
     public function remove(Request $request)
     {
-       $isbn  = $request['isbn'];
-       $book = Book::where('isbn','=',$isbn)->firstOrFail();          
-       Book::where('isbn', '=', $isbn)->delete();
-       Author::authorHasBooks($book['author']);
-       return "OK";  
-           
+       Book::where('id', '=', $request['id'])->delete();
+       return "OK";   
     }
 
 //------------------------------------------------------------------------------    
     
     public function edit(Request $request)
     {
-        $isbn = $request['isbn'];
-        $book = Book::where('isbn', '=', $isbn)->firstOrFail();
-        $author = Author::where('name','=',$book['author'])->firstOrFail();
-        return view('book_shelf.edit',['book'=>$book,'author'=>$author]);
+        $book = Book::where('id', '=', $request['id'])->firstOrFail();
+        return view('book_shelf.edit',['book'=>$book]);
     }
 
 //------------------------------------------------------------------------------ 
     
     public function update(Request $request)
     {
-        Book::where('isbn', '=', $request['oldIsbn'])->update(
-                    ['title' => $request['title'],
-                     'author' => $request['author'],
-                     'year' => $request['year'],   
-                    ]);
-        if($request['isbn']!=$request['oldIsbn'])
-        {
-            if(Book::isIsbn($request['isbn']) == true)
-            {
-                return "ISBN already exist! Please enter another ISBN!";
-            }
-        }
-        Book::where('isbn', '=', $request['oldIsbn'])->update(
-                   ['isbn' => $request['isbn']]);
-        if($request['author']!=$request['oldAuthor'])
-        {
+        $this->validate($request, [
+            'title' => 'required|min:2',
+            'author' => 'required',
+            'year' => 'required|numeric|min:3',
+            'isbn' => 'required',
+        ]);
             if(Author::isAuthor($request['author']) == false)
                 {
                     Author::addNewAuthor($request); 
@@ -72,14 +56,13 @@ class BookShelfController extends Controller
                                   'phone' => $request['phone']  
                                  ]); 
                     }
-        }
-        else{
-            Author::where('name','=',$request['oldAuthor'])->update(
-                         ['email' => $request['email'],
-                          'phone' => $request['phone']  
-                         ]);
-            }
-        Author::authorHasBooks($request['oldAuthor']);    
+        $author = Author::where('name','=',$request['author'])->firstOrFail();
+        Book::where('id', '=', $request['id'])->update(
+                    ['title' => $request['title'],
+                     'year' => $request['year'],
+                     'isbn' => $request['isbn'],
+                     'author_id' => $author['id']
+                    ]);    
         return "OK";
     }
     
@@ -94,22 +77,30 @@ class BookShelfController extends Controller
     
     public function store(Request $request)
     {
+       $this->validate($request, [
+            'title' => 'required|min:2',
+            'author' => 'required',
+            'year' => 'required|numeric|min:3',
+            'isbn' => 'required',
+        ]);
+       if(Author::isAuthor($request['author']) == false)
+       {
+           Author::addNewAuthor($request); 
+       }
+       $author = Author::where('name','=',$request['author'])->firstOrFail();
        $book = new Book;
        $book->title = $request['title'];
-       $book->author = $request['author'];
+       $book->author_id = $author->id;
        $book->year = $request['year'];
        if(Book::isIsbn($request['isbn'])==true)
        {
            return "ISBN already exist! Please enter another ISBN!";
        }
-       else{
+       else
+       {
            $book->isbn = $request['isbn'];
            $book->save();
-       if(Author::isAuthor($request['author']) == false)
-       {
-           Author::addNewAuthor($request); 
-       }
-           }
+        }
     return "OK";
     }
     

@@ -18,15 +18,15 @@
                 
                 var isbn;
                 $('.remove').click(function(){
-                    isbn = $(this).parent().find('.isbn').html();
-                    var obj = $(this).parent().find('.isbn').parent();
+                    id = $(this).parent().find('.id').html();
+                    var obj = $(this).parent().find('.id').parent();
                     var confirmDeleting = confirm('You really want to delete this book?');
          
                     if (confirmDeleting) {  
                         $.ajax({
                             url: 'index/remove',
                             type: 'POST',
-                            data: {isbn:isbn}
+                            data: {id:id}
                                 })
                         .done(function(msg){
                             if( msg === "OK"){
@@ -39,8 +39,8 @@
                     });
                 
                 $('.edit').click(function(){
-                    isbn = $(this).parent().find('.isbn').html();
-                    return location.href = 'edit?isbn='+isbn;
+                    id = $(this).parent().find('.id').html();
+                    return location.href = 'edit?id='+id;
                 });
             });
         </script>
@@ -68,6 +68,10 @@
                 margin-bottom: 10px;
             }
             
+            .id{
+                display: none;
+            }
+            
         </style>
     </head>
     
@@ -84,6 +88,7 @@
             <table class="table table-hover" id="book-shelf" method="post">
                 <thead>
                     <tr>
+                        <th class="id">ID</th>
                         <th>Title</th>
                         <th>Author</th>
                         <th>Year</th>
@@ -97,8 +102,10 @@
                     foreach($books as $book)
                     {
                         echo "<tr>";
+                        echo "<td class='id'>$book->id</td>";
                         echo "<td>$book->title</td>";
-                        echo "<td>$book->author</td>";
+                        $author = $book->author;
+                        echo "<td>$author->name</td>";
                         echo "<td>$book->year</td>";
                         echo "<td class='isbn'>$book->isbn</td>";
                         echo "<td class='remove'><a href='#'><span class='glyphicon glyphicon-remove-sign'></span></a></td>";

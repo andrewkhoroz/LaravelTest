@@ -42,14 +42,13 @@
                   var form = $(this),
                       submitBtn = form.find('button[type="submit"]');
                   
-                  if( app.validateForm(form) === false ) return false;
                   submitBtn.attr('disabled','disabled');
                   
                   var str = form.serialize();
-                  str+='&oldIsbn=';                 
-                  str+= '<?php echo $book->isbn; ?>';
+                  str+='&id=';                 
+                  str+= '<?php echo $book->id; ?>';
                   str+='&oldAuthor=';                 
-                  str+= '<?php echo $book->author; ?>';
+                  str+= '<?php echo $book->author_id; ?>';
                   console.log(str);
                   $.ajax({
                       url: 'update',
@@ -68,44 +67,7 @@
                   .always(function(){
                      submitBtn.removeAttr('disabled'); 
                   });
-		      },		
-                
-              validateForm: function (form) {
-               
-                  var inputs = form.find('input'),
-                      valid = true;
-                  
-                  inputs.tooltip('destroy');
-                  document.getElementById('email').defaultValue = "undefined@undef";
-                  document.getElementById('phone').defaultValue = "undefined";
-                  $.each(inputs, function(index,val){
-                     var input = $(val),
-                         val = input.val(),
-                         formGroup = input.parents('.form-group'),
-                         label = formGroup.find('label').text().toLowerCase(),
-                         textError = 'Enter ' + label;
-                      
-                      if(val.length === 0){
-                          formGroup.addClass('has-error').removeClass('has-success');
-                          input.tooltip({
-                              trigger: 'manual',
-                              placement: 'right',
-                              title: textError
-                          }).tooltip('show');
-                          valid = false;
-                      }else{
-                          formGroup.addClass('has-success').removeClass('has-error');
-                      }
-                  });
-                    
-                  document.getElementById('email').defaultValue = "";
-                  document.getElementById('phone').defaultValue = "";
-                  return valid;
-              },
-                
-                removeError: function (){
-                    $(this).tooltip('destroy').parents('.form-group').removeClass('has-error');
-                }
+		      }
 		
 	       };
  
@@ -127,6 +89,7 @@
         form{
             width: 90%;
         }
+        
     </style>
     
     <body>
@@ -147,16 +110,20 @@
                     </div>
                     <div class="form-group">
                         <label for="author">Author name*:</label>
-                        <input type="text" class="form-control" id="author" placeholder="Enter author's name" name="author" value='<?php echo $book->author?>'>
+                        <input type="text" class="form-control" id="author" placeholder="Enter author's name" name="author" value='<?php 
+                        $author = $book->author;
+                        echo $author->name?>'>
                     </div>
                     <div id="author-info">
                     <div class="form-group">
                         <label for="email">Author's email:</label>
-                        <input type="email" class="form-control" id="email" placeholder="Enter author's email" name="email" value='<?php echo $author->email?>'>
+                        <input type="email" class="form-control" id="email" placeholder="Enter author's email" name="email" value='<?php 
+                        echo $author->email?>'>
                     </div>
                     <div class="form-group">
                         <label for="phone">Author's phone:</label>
-                        <input type="text" class="form-control" id="phone" placeholder="Enter author's phone" name="phone" value='<?php echo $author->phone?>'>
+                        <input type="text" class="form-control" id="phone" placeholder="Enter author's phone" name="phone" value='<?php 
+                        echo $author->phone?>'>
                     </div>
                         </div>
                     <div class="form-group">

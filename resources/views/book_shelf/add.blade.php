@@ -41,7 +41,6 @@
                   var form = $(this),
                       submitBtn = form.find('button[type="submit"]');
                   
-                  if( app.validateForm(form) === false ) return false;
                   submitBtn.attr('disabled','disabled');
                    
                   var str = form.serialize();
@@ -65,42 +64,7 @@
                   });
 		      },		
                 
-              validateForm: function (form) {
-                  var inputs = form.find('input'),
-                      valid = true;
-                  inputs.tooltip('destroy');
-                  document.getElementById('email').defaultValue = "undefined@undef";
-                  document.getElementById('phone').defaultValue = "undefined";
-                  $.each(inputs, function(index,val){
-                     var input = $(val),
-                         val = input.val(),
-                         formGroup = input.parents('.form-group'),
-                         label = formGroup.find('label').text().toLowerCase(),
-                         textError = 'Enter ' + label; 
-                      if(val.length === 0){
-                          formGroup.addClass('has-error').removeClass('has-success');
-                          input.tooltip({
-                              trigger: 'manual',
-                              placement: 'right',
-                              title: textError
-                          }).tooltip('show');
-                          valid = false;
-                      }else{
-                          formGroup.addClass('has-success').removeClass('has-error');
-                      }
-                  });
-                  document.getElementById('email').defaultValue = "";
-                  document.getElementById('phone').defaultValue = "";
-                  return valid;
-              },
-                
-            /*  validateContent: function (form) {
-                  var inputs = form.find('input'),
-                      valid = true;
-              }
-              */  
-              removeError: function (){
-                    $(this).tooltip('destroy').parents('.form-group').removeClass('has-error');
+                removeError: function (){
                     var result = "Add book!"; 
                         document.getElementById('result').innerHTML = result;
                 }

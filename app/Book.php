@@ -11,11 +11,8 @@ class Book extends Model
     
 //------------------------------------------------------------------------------
     
-    protected $table = 'book'; 
-    protected $fillable = [
-        'title', 'author', 'year', 'isbn'
-    ];
-    public $timestamps = false;
+    protected $table = 'books'; 
+    protected $fillable = ['title', 'author_id', 'year', 'isbn'];
     
 //------------------------------------------------------------------------------
     
@@ -32,7 +29,12 @@ class Book extends Model
        return false;
     }
     
-//------------------------------------------------------------------------------    
+//------------------------------------------------------------------------------ 
+    
+    public function author()
+    {
+        return $this->belongsTo('App\Author');
+    }
     
 }
 
