@@ -1,81 +1,6 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Book Shelf</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans&subset=latin,cyrillic-ext,cyrillic' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
-        
-        <script>
-            $(document).ready(function() {
-                $('#book-shelf').DataTable( );
-                
-                var isbn;
-                $('.remove').click(function(){
-                    id = $(this).parent().find('.id').html();
-                    var obj = $(this).parent().find('.id').parent();
-                    var confirmDeleting = confirm('You really want to delete this book?');
-         
-                    if (confirmDeleting) {  
-                        $.ajax({
-                            url: 'index/remove',
-                            type: 'POST',
-                            data: {id:id}
-                                })
-                        .done(function(msg){
-                            if( msg === "OK"){
-                                obj.css('display','none');
-                            }else{
-                                alert(msg);
-                            }  
-                        })
-                    }
-                    });
-                
-                $('.edit').click(function(){
-                    id = $(this).parent().find('.id').html();
-                    return location.href = 'edit?id='+id;
-                });
-            });
-        </script>
-        
-        <style>
-            html, body {
-                height: 100%;
-            }
+@extends('app')
 
-            body {
-                margin: 0;
-                margin-top: 15px;
-                padding: 0;
-                width: 100%;
-                display: table;
-                font-weight: 100;
-                font-family: 'Open Sans', sans-serif;
-            }
-            
-            table{
-                cursor: pointer;
-            }
-            
-            .add{
-                margin-bottom: 10px;
-            }
-            
-            .id{
-                display: none;
-            }
-            
-        </style>
-    </head>
-    
-    <body method="post">
+@section('content')
         <div class="container">
             <div class="add">
                 <a href="add" class="btn btn-info btn-lg">
@@ -116,5 +41,4 @@
                 </tbody>
             </table>
         </div>
-    </body>
-</html>
+   @stop
