@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 
 use App\Book;
 use App\Author;
-use App\Http\Requests\CreateUpdateBookRequest;
 
 //------------------------------------------------------------------------------
 
@@ -17,16 +16,16 @@ class BookShelfController extends Controller
     
     public function index()
     {
-        $book = Book::all();
-        return view('book_shelf.index')->with('books', $book);
+        $books = Book::all();
+        return view('book_shelf.index',['books'=>$books]);
     }
 
 //------------------------------------------------------------------------------
     
     public function remove(Request $request)
-    { 
+    {
        Book::where('id', '=', $request['id'])->delete();
-       return redirect('index');   
+       return "OK";   
     }
 
 //------------------------------------------------------------------------------    
@@ -34,44 +33,75 @@ class BookShelfController extends Controller
     public function edit(Request $request)
     {
         $book = Book::where('id', '=', $request['id'])->firstOrFail();
-        $authors = Author::lists('name', 'id');
-        return view('book_shelf.edit')->with('book', $book)->with('authors', $authors);
-        
+        return view('book_shelf.edit',['book'=>$book]);
     }
 
 //------------------------------------------------------------------------------ 
     
-    public function update(CreateUpdateBookRequest $request)
+    public function update(Request $request)
     {
+        $this->validate($request, [
+            'title' => 'required|min:2',
+            'author' => 'required',
+            'year' => 'required|numeric|min:3',
+            'isbn' => 'required',
+        ]);
+            if(Author::isAuthor($request['author']) == false)
+                {
+                    Author::addNewAuthor($request); 
+                }
+                else{
+                    Author::where('name','=',$request['author'])->update(
+                                 ['email' => $request['email'],
+                                  'phone' => $request['phone']  
+                                 ]); 
+                    }
+        $author = Author::where('name','=',$request['author'])->firstOrFail();
         Book::where('id', '=', $request['id'])->update(
-                ['title' => $request['title'],
-                 'year' => $request['year'],
-                 'isbn' => $request['isbn'],
-                 'author_id' => $request['author']
-                 ]);
-        return redirect('index');
+                    ['title' => $request['title'],
+                     'year' => $request['year'],
+                     'isbn' => $request['isbn'],
+                     'author_id' => $author['id']
+                    ]);    
+        return "OK";
     }
     
 //------------------------------------------------------------------------------    
  
     public function add()
     {
-        $books = Book::all();
-        $authors = Author::lists('name', 'id');
-        return view('book_shelf.add')->with('books', $books)->with('authors', $authors);
+        return view('book_shelf.add');
     }
            
 //------------------------------------------------------------------------------    
     
-    public function store(CreateUpdateBookRequest $request)
+    public function store(Request $request)
     {
+       $this->validate($request, [
+            'title' => 'required|min:2',
+            'author' => 'required',
+            'year' => 'required|numeric|min:3',
+            'isbn' => 'required',
+        ]);
+       if(Author::isAuthor($request['author']) == false)
+       {
+           Author::addNewAuthor($request); 
+       }
+       $author = Author::where('name','=',$request['author'])->firstOrFail();
        $book = new Book;
        $book->title = $request['title'];
-       $book->author_id = $request['author'];
+       $book->author_id = $author->id;
        $book->year = $request['year'];
-       $book->isbn = $request['isbn'];
-       $book->save();
-       return redirect('index');
+       if(Book::isIsbn($request['isbn'])==true)
+       {
+           return "ISBN already exist! Please enter another ISBN!";
+       }
+       else
+       {
+           $book->isbn = $request['isbn'];
+           $book->save();
+        }
+    return "OK";
     }
     
 //------------------------------------------------------------------------------    
