@@ -17,7 +17,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/','BookShelfController@index');
     Route::get('add','BookShelfController@add');
     Route::get('index','BookShelfController@index');
-    Route::get('remove','BookShelfController@remove');
+    Route::post('remove','BookShelfController@remove');
     Route::get('edit','BookShelfController@edit');
     Route::post('store','BookShelfController@store');
     Route::post('update','BookShelfController@update');

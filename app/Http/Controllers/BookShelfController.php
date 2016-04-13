@@ -26,7 +26,7 @@ class BookShelfController extends Controller
     public function remove(Request $request)
     { 
        Book::where('id', '=', $request['id'])->delete();
-       return redirect('index');   
+       return "OK";   
     }
 
 //------------------------------------------------------------------------------    
@@ -56,9 +56,9 @@ class BookShelfController extends Controller
  
     public function add()
     {
-        $books = Book::all();
+        $book = new Book;
         $authors = Author::lists('name', 'id');
-        return view('book_shelf.add')->with('books', $books)->with('authors', $authors);
+        return view('book_shelf.add')->with('authors', $authors)->with('book',$book);
     }
            
 //------------------------------------------------------------------------------    
